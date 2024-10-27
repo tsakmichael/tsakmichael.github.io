@@ -1,0 +1,24 @@
+<div> 
+  https://github.com/mongodb/mongo-swift-driver.git
+https://github.com/apple/swift-nio.git
+</div>
+
+  
+  <div>
+
+import MongoSwift
+import NIO
+let elg = MultiThreadedEventLoopGroup(numberOfThreads: 4)
+let client = try MongoClient(
+    "mongodb+srv://oluwatosinakinbobuyi:<db_password>@cluster0.i91jaix.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    using: elg
+)
+defer {
+  try? client.syncClose()
+  cleanupMongoSwift()
+  try? elg.syncShutdownGracefully()
+}
+
+print(try client.listDatabaseNames().wait())
+
+  </div>
