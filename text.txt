@@ -22,3 +22,15 @@ defer {
 print(try client.listDatabaseNames().wait())
 
   </div>
+
+
+import MongoSwiftSync
+let client = try MongoClient(
+    "mongodb+srv://oluwatosinakinbobuyi:<db_password>@cluster0.i91jaix.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+)
+defer {
+    cleanupMongoSwift()
+}
+let db = client.db("testDB")
+let collection = db.collection("testCol")
+
