@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sliding Puzzle</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #1e293b;
+      transition: background 0.3s;
+    }
+    #controls {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+    #moves {
+      font-size: 18px;
+      margin: 10px;
+      color: white;
+    }
+
+    #puzzle {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 5px;
+    }
+    .tile {
+      background: #3498db;
+      color: white;
+      font-size: 2em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .empty {
+      background: #1e293b;
+      cursor: default;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-10px) translateX(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) translateX(var(--drift)) rotate(var(--spin)); opacity: 0; }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 5px #3498db; }
+      50% { box-shadow: 0 0 20px #3498db, 0 0 30px #3498db; }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    @keyframes wave {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #2d3748;
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+      min-width: 200px;
+    }
+    .score-item {
+      padding: 5px 0;
+      border-bottom: 1px solid #4a5568;
+    }
+    .close {
+      float: right;
+      cursor: pointer;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <div id="moves">Moves: 0</div>
+    <button onclick="shuffle()">Shuffle</button>
+    <button onclick="showScores()">Scores</button>
+
+  </div>
+  <div id="puzzle"></div>
+  
+  <div id="scoreModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+
+      <div id="scoreList"></div>
+    </div>
+  </div>
+
+  <script>
+    const puzzle = document.getElementById("puzzle");
+    const movesDisplay = document.getElementById("moves");
+    let tiles = [1, 2, 3, 4, 5, 6, 7, 8, null];
+    let moveCount = 0;
+
+    function render() {
+      puzzle.innerHTML = "";
+      tiles.forEach((num, index) => {
+        const tile = document.createElement("div");
+        tile.className = num ? "tile" : "tile empty";
+        tile.textContent = num || "";
+        tile.addEventListener("click", () => moveTile(index));
+        puzzle.appendChild(tile);
+      });
+    }
+
+    function moveTile(index) {
+      const emptyIndex = tiles.indexOf(null);
+      const validMoves = [index - 1, index + 1, index - 3, index + 3];
+      if (validMoves.includes(emptyIndex) &&
+          Math.abs(emptyIndex % 3 - index % 3) + Math.abs(Math.floor(emptyIndex / 3) - Math.floor(index / 3)) === 1) {
+        [tiles[index], tiles[emptyIndex]] = [tiles[emptyIndex], tiles[index]];
+        moveCount++;
+        movesDisplay.textContent = `Moves: ${moveCount}`;
+        render();
+        if (tiles.slice(0, 8).every((tile, i) => tile === i + 1)) {
+          saveScore(moveCount);
+          puzzleAnimation();
+          setTimeout(confetti, 300);
+        }
+      }
+    }
+
+    function puzzleAnimation() {
+      const allTiles = puzzle.children;
+      puzzle.style.animation = 'glow 1s ease-in-out 3';
+      
+      Array.from(allTiles).forEach((tile, i) => {
+        if (tile.textContent) {
+          setTimeout(() => {
+            tile.style.animation = 'wave 0.6s ease-in-out, pulse 0.8s ease-in-out';
+            tile.style.background = '#2ecc71';
+          }, i * 100);
+        }
+      });
+      
+      setTimeout(() => {
+        Array.from(allTiles).forEach(tile => {
+          tile.style.animation = '';
+          tile.style.background = '#3498db';
+        });
+        puzzle.style.animation = '';
+      }, 2000);
+    }
+
+    function confetti() {
+      for (let i = 0; i < 150; i++) {
+        setTimeout(() => {
+          const piece = document.createElement('div');
+          const size = Math.random() * 12 + 8;
+          const colors = ['#ff6b6b','#4ecdc4','#45b7d1','#96ceb4','#feca57','#ff9ff3','#54a0ff','#5f27cd'];
+          const shapes = ['50%', '0%'];
+          const drift = (Math.random() - 0.5) * 200;
+          const spin = Math.random() * 720 + 360;
+          const duration = Math.random() * 2 + 2;
+          
+          piece.style.cssText = `position:fixed;width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${shapes[Math.floor(Math.random()*shapes.length)]};left:${Math.random()*100}%;top:-20px;pointer-events:none;--drift:${drift}px;--spin:${spin}deg;animation:fall ${duration}s ease-out forwards, bounce 0.5s ease-in-out`;
+          
+          document.body.appendChild(piece);
+          setTimeout(() => piece.remove(), duration * 1000);
+        }, i * 20);
+      }
+    }
+
+    function shuffle() {
+      for (let i = 0; i < 1000; i++) {
+        const emptyIndex = tiles.indexOf(null);
+        const neighbors = [];
+        if (emptyIndex % 3 > 0) neighbors.push(emptyIndex - 1);
+        if (emptyIndex % 3 < 2) neighbors.push(emptyIndex + 1);
+        if (emptyIndex > 2) neighbors.push(emptyIndex - 3);
+        if (emptyIndex < 6) neighbors.push(emptyIndex + 3);
+        const randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
+        [tiles[emptyIndex], tiles[randomNeighbor]] = [tiles[randomNeighbor], tiles[emptyIndex]];
+      }
+      moveCount = 0;
+      movesDisplay.textContent = 'Moves: 0';
+      render();
+    }
+
+    function saveScore(moves) {
+      const scores = JSON.parse(localStorage.getItem('puzzleScores') || '[]');
+      scores.unshift({ moves, date: new Date().toLocaleDateString() });
+      localStorage.setItem('puzzleScores', JSON.stringify(scores.slice(0, 3)));
+    }
+
+    function showScores() {
+      const scores = JSON.parse(localStorage.getItem('puzzleScores') || '[]');
+      const list = document.getElementById('scoreList');
+      list.innerHTML = scores.length ? scores.map((s, i) => 
+        `<div class="score-item">${i + 1}. ${s.moves} moves - ${s.date}</div>`
+      ).join('') : '<div>No scores yet</div>';
+      document.getElementById('scoreModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('scoreModal').style.display = 'none';
+    }
+
+    shuffle();
+    render();
+  </script>
+</body>
+</html>
