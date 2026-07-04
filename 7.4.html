@@ -1,11 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Doubles/Triples Air Brake Check</title>
+
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #f7f7f7;
+    color: #333;
+  }
+
+  section {
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  h3 {
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    color: #444;
+  }
+
+  .cdl-block {
+    background: #fff;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #e3e3e3;
+  }
+
+  .cdl-block h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #222;
+  }
+
+  ol {
+    padding-left: 1.2rem;
+  }
+
+  ol li {
+    margin-bottom: 1rem;
+  }
+
+  .cdl-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .cdl-images figure {
+    flex: 1 1 260px;
+  }
+
+  .cdl-images img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  .cdl-images figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+</style>
+</head>
+
+<body>
+
 <section id="doubles-triples-air-brake-check">
+
   <h2>7.4 – Doubles/Triples Air Brake Check</h2>
   <p>You must also make the following checks on your double or triple trailers.</p>
 
   <h3>7.4.1 – Additional Air Brake Checks</h3>
 
   <!-- Check That Air Flows to All Trailers -->
-  <article id="check-air-flows-all-trailers">
+  <article class="cdl-block" id="check-air-flows-all-trailers">
     <h4>Check That Air Flows to All Trailers (Double and Triple Trailers)</h4>
 
     <ol>
@@ -13,114 +96,115 @@
         <strong>Secure the vehicle.</strong>
         <p>Use the tractor parking brake and/or chock the wheels to hold the vehicle.</p>
       </li>
+
       <li>
         <strong>Build normal air pressure.</strong>
-        <p>Wait for air pressure to reach normal, then push in the red
-          <em>“trailer air supply”</em> knob.</p>
+        <p>Wait for air pressure to reach normal, then push in the red <em>“trailer air supply”</em> knob.</p>
       </li>
+
       <li>
         <strong>Charge emergency and service lines.</strong>
-        <p>This supplies air to the emergency (supply) lines. Use the trailer handbrake
-          to provide air to the service line.</p>
+        <p>This supplies air to the emergency (supply) lines. Use the trailer handbrake to provide air to the service line.</p>
       </li>
+
       <li>
         <strong>Check emergency line at rear.</strong>
-        <p>Go to the rear of the rig and open the emergency line shut‑off valve at the
-          rear of the last trailer. You should hear air escaping, showing the entire
-          system is charged. Close the emergency line valve.</p>
+        <p>Open the emergency line shut‑off valve at the rear of the last trailer. Air should escape, showing the system is charged. Close the valve afterward.</p>
       </li>
+
       <li>
         <strong>Check service line at rear.</strong>
-        <p>Open the service line valve to check that service pressure goes through all
-          the trailers (this assumes the trailer handbrake or service brake pedal is on),
-          then close the valve.</p>
+        <p>Open the service line valve to confirm service pressure reaches all trailers (service brake or handbrake must be applied). Close the valve afterward.</p>
       </li>
+
       <li>
         <strong>Verify air to the back.</strong>
-        <p>If you do <strong>not</strong> hear air escaping from both lines, check that the
-          shut‑off valves on the trailer(s) and dolly(ies) are in the <strong>OPEN</strong>
-          position. You must have air all the way to the back for all the brakes to work.</p>
+        <p>If you do <strong>not</strong> hear air escaping from both lines, check that all shut‑off valves on trailers and dollies are <strong>OPEN</strong>. Air must reach the back for brakes to work.</p>
       </li>
     </ol>
 
-    <!-- Image placeholders -->
-    <div class="air-flow-images">
+    <div class="cdl-images">
       <figure>
-        <img src="images/emergency-line-valve.jpg" alt="Emergency line shut-off valve at rear of last trailer">
+        <img src="https://raw.githubusercontent.com/tsakmichael/tsakmichael.github.io/main/emergency-line-valve.jpg" alt="Emergency line shut-off valve">
         <figcaption>Emergency line shut‑off valve (rear of last trailer).</figcaption>
       </figure>
+
       <figure>
-        <img src="images/service-line-valve.jpg" alt="Service line valve at rear of last trailer">
-        <figcaption>Service line valve used to confirm service pressure reaches all trailers.</figcaption>
+        <img src="images/service-line-valve.jpg" alt="Service line valve">
+        <figcaption>Service line valve confirming service pressure reaches all trailers.</figcaption>
       </figure>
     </div>
   </article>
 
-  <!-- Test Tractor Protection Valve -->
-  <article id="test-tractor-protection-valve">
+  <!-- Tractor Protection Valve -->
+  <article class="cdl-block" id="test-tractor-protection-valve">
     <h4>Test Tractor Protection Valve</h4>
 
     <ol>
       <li>
         <strong>Charge trailer air brake system.</strong>
-        <p>Build up normal air pressure and push the <em>“air supply”</em> knob in.</p>
+        <p>Build normal air pressure and push the <em>“air supply”</em> knob in.</p>
       </li>
+
       <li>
         <strong>Shut off engine.</strong>
         <p>Turn off the engine.</p>
       </li>
+
       <li>
         <strong>Fan off air pressure.</strong>
-        <p>Step on and off the brake pedal several times to reduce the air pressure in the tanks.</p>
+        <p>Step on and off the brake pedal several times to reduce air pressure.</p>
       </li>
+
       <li>
         <strong>Watch trailer air supply control.</strong>
-        <p>The trailer air supply control (tractor protection valve control) should pop out
-          (or go from “normal” to “emergency” position) when air pressure falls into the
-          manufacturer’s specified range (usually <strong>20–45 psi</strong>).</p>
+        <p>The control should pop out (normal → emergency) when pressure drops to the manufacturer’s range (usually <strong>20–45 psi</strong>).</p>
       </li>
+
       <li>
         <strong>Understand the risk if it fails.</strong>
-        <p>If the tractor protection valve doesn’t work properly, an air hose or trailer brake
-          leak could drain all the air from the tractor. This would cause the emergency brakes
-          to come on, with possible loss of control.</p>
+        <p>If the valve fails, a hose or trailer leak could drain all tractor air, causing emergency brakes to activate and risking loss of control.</p>
       </li>
     </ol>
 
-    <div class="tractor-protection-images">
+    <div class="cdl-images">
       <figure>
-        <img src="images/trailer-air-supply-knob.jpg" alt="Red trailer air supply control knob">
+        <img src="images/trailer-air-supply-knob.jpg" alt="Trailer air supply knob">
         <figcaption>Trailer air supply control (red knob) in normal vs. popped‑out position.</figcaption>
       </figure>
     </div>
   </article>
 
-  <!-- Test Trailer Emergency Brakes -->
-  <article id="test-trailer-emergency-brakes">
+  <!-- Trailer Emergency Brakes -->
+  <article class="cdl-block" id="test-trailer-emergency-brakes">
     <h4>Test Trailer Emergency Brakes</h4>
 
     <ol>
       <li>
         <strong>Charge trailer air brake system.</strong>
-        <p>Charge the trailer air brake system and check that the trailer rolls freely.</p>
+        <p>Charge the system and ensure the trailer rolls freely.</p>
       </li>
+
       <li>
         <strong>Apply trailer emergency brakes.</strong>
-        <p>Stop and pull out the trailer air supply control (tractor protection valve control
-          or trailer emergency valve), or place it in the <em>“emergency”</em> position.</p>
+        <p>Pull out the trailer air supply control (tractor protection valve control) or place it in the <em>“emergency”</em> position.</p>
       </li>
+
       <li>
         <strong>Verify brakes hold.</strong>
-        <p>Pull gently on the trailer with the tractor to check that the trailer emergency
-          brakes are on.</p>
+        <p>Pull gently with the tractor to confirm the trailer emergency brakes are engaged.</p>
       </li>
     </ol>
 
-    <div class="emergency-brake-images">
+    <div class="cdl-images">
       <figure>
-        <img src="images/trailer-emergency-brake-test.jpg" alt="Tractor gently pulling against trailer to test emergency brakes">
-        <figcaption>Checking that trailer emergency brakes hold when the air supply control is in emergency.</figcaption>
+        <img src="images/trailer-emergency-brake-test.jpg" alt="Testing trailer emergency brakes">
+        <figcaption>Verifying trailer emergency brakes hold when the air supply control is in emergency.</figcaption>
       </figure>
     </div>
   </article>
+
 </section>
+
+</body>
+</html>
